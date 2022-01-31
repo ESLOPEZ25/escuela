@@ -20,11 +20,17 @@ class InspectorServise {
     }
 
 
+
     fun save(inspector: Inspector): Inspector{
         try {
-            if (inspector.name?.trim()?.isEmpty() == true){
-                throw Exception("El nombre no puede ser vacio")
-            }
+
+            inspector.name?.takeIf { it.trim().isNotEmpty() }
+                ?: throw Exception("El nombre no debe ser vacio")
+
+
+           /// if (inspector.name?.trim()?.isEmpty() == true){
+              ///  throw Exception("El nombre no puede ser vacio")
+            //}
             return inspectorRepository.save(inspector)
         }catch (ex: Exception){
             throw ResponseStatusException(
@@ -52,7 +58,7 @@ class InspectorServise {
 
     }
 
-    fun updateDescription (inspector: Inspector): Inspector {
+   /*/ fun updateDescription (inspector: Inspector): Inspector {
         try {
             if (inspector.name.equals("")){
                 throw java.lang.Exception("description no puede ser vacio")
@@ -68,11 +74,22 @@ class InspectorServise {
             throw ResponseStatusException(
                 HttpStatus.NOT_FOUND, ex.message, ex)
         }
-    }
+    }*/
 
     fun delete (id:Long): Boolean{
         inspectorRepository.deleteById(id)
         return true
     }
+
+
+    fun updateInspector (inspector: Inspector) {
+
+
+        inspector.name?.takeIf { it.trim().isNotEmpty() }
+            ?: throw Exception("no exixte")
+    }
+
+
+
 }
 
