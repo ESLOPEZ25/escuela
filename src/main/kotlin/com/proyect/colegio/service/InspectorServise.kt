@@ -58,7 +58,7 @@ class InspectorServise {
 
     }
 
-   /*/ fun updateDescription (inspector: Inspector): Inspector {
+    fun updateDescription (inspector: Inspector): Inspector {
         try {
             if (inspector.name.equals("")){
                 throw java.lang.Exception("description no puede ser vacio")
@@ -74,7 +74,7 @@ class InspectorServise {
             throw ResponseStatusException(
                 HttpStatus.NOT_FOUND, ex.message, ex)
         }
-    }*/
+    }
 
     fun delete (id:Long): Boolean{
         inspectorRepository.deleteById(id)
@@ -82,12 +82,13 @@ class InspectorServise {
     }
 
 
-    fun updateInspector (inspector: Inspector) {
+   /* fun updateDescription (inspector: Inspector) {
 
 
         inspector.name?.takeIf { it.trim().isNotEmpty() }
             ?: throw Exception("no exixte")
-    }
+        return inspectorRepository.save(inspector)
+    }*/
 
 
 
